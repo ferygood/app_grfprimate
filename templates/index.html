@@ -3,9 +3,79 @@
 {% block title %}Index Page{% endblock %}
 
 {% block content %}
-    <h1>Home Page</h1>
-    <p>Welcome to the index page!</p>
-    <a href="{{ url_for('download') }}">Go to Download Page</a>
-    <br>
-    <a href="{{ url_for('about') }}">Go to About Page</a>
+    <style>
+        .scroll-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .top-button {
+            bottom: 120px;
+        }
+
+        .bottom-button {
+            bottom: 60px;
+        }
+
+    </style>
+    
+    <div style="background-image: url('{{ url_for('static', filename='tfprimate_bgwall.png') }}'); background-color: rgba(0, 0, 0, 0.3);">
+        <div class="row">
+            <div class="col" style="padding: 60px;">
+                <h3>Transcription Factors Database</h3>
+                <h3 class="text-success">For Human and Primates</h3>
+                <br></br>
+                <p> Search information by TF name or ID</p>
+                <p> Get alignment results</p>
+                <p> Download selected TFs </p>
+                <a href="#section2" class="btn btn-outline-success">Get Started</a>
+            </div>
+            <div class="col" style="padding: 60px;">
+                Here some figure
+            </div>    
+        </div>
+    </div>
+
+    <div id="section2" style="background-color: rgba(249, 244, 247, 0.8);">
+        <div class="row">
+            <div class="col-8">
+                <div class="Container" style="padding: 50px">
+                    <img src="{{ url_for('static', filename='ZNF28.jpg') }}" alt="Image" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="Container" style="padding-top: 70px">
+                    <h4>Feature 1</h4>
+                    Here some text describing features
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: rgba(244, 249, 247, 0.8);">
+        <div class="row">
+            <div class="col-4">
+                <div class="Container" style="padding-top: 70px; padding-left: 50px">
+                    <h4>Feature 2</h4>
+                    Here some text describing features
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="Container" style="padding: 50px">
+                    <img src="{{ url_for('static', filename='test_rnaseq.png') }}" alt="Image" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="#top" class="scroll-button top-button">Top</a>
+    <a href="#section2" class="scroll-button bottom-button">Bottom</a>
+
 {% endblock %}
