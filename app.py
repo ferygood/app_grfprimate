@@ -1,8 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
+from pymsaviz import MsaViz
 
-import random
-from bokeh.plotting import figure
-from bokeh.embed import components
 
 app = Flask(__name__)
 
@@ -14,20 +12,17 @@ def index():
 def search():
     return render_template('search.html')
 
-@app.route('/alignment')
+@app.route('/alignment', methods=['GET', 'POST'])
 def alignment():
-    p1 = figure(height=350, sizing_mode="stretch_width")
-    p1.circle(
-        [i for i in range(10)],
-        [random.randint(1, 50) for j in range(10)],
-        size=20,
-        color="navy",
-        alpha=0.5
-    )
+    if request.method == 'POST':
+        gene = request.form['gene']
+        if gene == "ELOA3DP":
+            img_path = "example_aln.png"
+        return render_template('alignment.html', fig_obj=img_path)
     
-    script1, div1 = components(p1)
+    # If the request method is GET, render the form
+    return render_template('alignment.html')
 
-    return render_template(template_name_or_list='alignment.html', script=[script1], div=[div1])
 
 @app.route('/download')
 def download():

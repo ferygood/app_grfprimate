@@ -1,3 +1,4 @@
+#temporary pymsaviz function
 from pymsaviz import MsaViz
 
 msa_file = "static/ENSG00000288616_codon.fa"
