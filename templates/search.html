@@ -3,9 +3,29 @@
 {% block title %}Search Page{% endblock %}
 
 {% block content %}
-    <h1>About Page</h1>
-    <p>This is the about page of the web application.</p>
-    <a href="{{ url_for('index') }}">Go back to Index Page</a>
-    <br>
-    <a href="{{ url_for('download') }}">Go to Download Page</a>
+  <form action="/search" method="POST">
+    <input type="text" name="gene_name" placeholder="Enter gene name">
+    <input type="submit" value="Search">
+  </form>
+
+  {% if gene_data %}
+    <h2 style="margin-top: 20px;">Search Results:</h2>
+    <table style="border-collapse: collapse; border: 1px solid black; margin-top: 10px; margin-bottom: 10px;">
+        <tr>
+            <th style="border: 1px solid black; padding: 8px;">EnsemblID</th>
+            <th style="border: 1px solid black; padding: 8px;">GeneName</th>
+            <th style="border: 1px solid black; padding: 8px;">Hsap</th>
+          </tr>
+          {% for row in gene_data %}
+          <tr>
+            <td style="border: 1px solid black; padding: 8px;">{{ row[0] }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ row[1] }}</td>
+            <td style="border: 1px solid black; padding: 8px;">{{ row[2] }}</td>
+          </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
+  {% if message %}
+    <p style="margin-top: 20px;">{{ message }}</p>
+  {% endif %}  
 {% endblock %}
