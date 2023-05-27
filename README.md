@@ -1,12 +1,15 @@
 # app_TFprimate  
 
-## Run debug mode
-Go the the root of the directory
-```
-python app.py
+## Reproducibility
+
+```bash
+git clone git@github.com:ferygood/app_TFprimate.git
 ```
 
-## Install dependencies
-```
+```python
+# create a virtualenv such as mkvirtualenv flask-tfprimate
 pip install -r requirements.txt
+
+# run debug mode
+python app.py
 ```
