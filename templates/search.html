@@ -3,9 +3,80 @@
 {% block title %}Search Page{% endblock %}
 
 {% block content %}
-    <h1>About Page</h1>
-    <p>This is the about page of the web application.</p>
-    <a href="{{ url_for('index') }}">Go back to Index Page</a>
-    <br>
-    <a href="{{ url_for('download') }}">Go to Download Page</a>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 40vh;">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Search a Transcription Factor (TF)</h4>
+                <img src="{{ url_for('static', filename='genes.png') }}" alt="" class="card-img-top" style="max-width: 200px; margin: 0 auto;">
+                <p class="card-text">Type a name or Ensembl ID of the desired TF and search for <br>results comparing human and other primates.</p>
+                <form action="/search" method="POST">
+                    <div class="mb-3">
+                        <input type="text" name="gene_name" placeholder="i.e. zeb2, ENSG00000169554" class="form-control" style="width: 70%; margin: 0 auto;">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <input type="submit" value="Search" class="btn btn-success" style="width: 70%; margin: 0 auto;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% if gene_data %}
+    <div class="container mt-5">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" id="info-tab" data-bs-toggle="tab" href="#info">Info</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="rna-seq-tab" data-bs-toggle="tab" href="#rna-seq">RNA-seq</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="phylo-tab" data-bs-toggle="tab" href="#phylo">Phylogenetic Tree</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="alignment-tab" data-bs-toggle="tab" href="#alignment">Alignment</a>
+            </li>
+        </ul>
+        <div class="tab-content mt-3">
+            <div class="tab-pane fade show active" id="info">
+                <h3>Info</h3>
+                <table style="border-collapse: collapse; border: 1px solid black; margin-top: 10px; margin-bottom: 10px;">
+                    <tr>
+                        <th style="border: 1px solid black; padding: 8px;">EnsemblID</th>
+                        <th style="border: 1px solid black; padding: 8px;">GeneName</th>
+                        <th style="border: 1px solid black; padding: 8px;">Hsap</th>
+                      </tr>
+                      {% for gene in gene_data %}
+                      <tr>
+                        <td style="border: 1px solid black; padding: 8px;">{{ gene[0] }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ gene[1] }}</td>
+                        <td style="border: 1px solid black; padding: 8px;">{{ gene[2] }}</td>
+                      </tr>
+                  {% endfor %}
+                </table>
+                <p>{{ row}}</p>
+            </div>
+            <div class="tab-pane fade" id="rna-seq">
+                <h3>RNA-seq</h3>
+                <!-- Add your RNA-seq content here -->
+            </div>
+            <div class="tab-pane fade" id="phylo">
+                <h3>Phylogenetic Tree</h3>
+                <!-- Add your phylogenetic tree content here -->
+            </div>
+            <div class="tab-pane fade" id="alignment">
+                <h3>Alignment</h3>
+                <!-- Add your alignment content here -->
+            </div>
+        </div>
+    </div>
+    {% else %}
+        <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
+            {% if gene_data is not defined %}
+                <img src="{{ url_for('static', filename='sorry.png') }}" alt="" style="max-width: 100px; margin: 0 auto;"><br>
+            {% endif %}
+            {{ message | safe }}
+        </div>
+    {% endif %}
+
 {% endblock %}
