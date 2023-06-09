@@ -2,16 +2,18 @@
 
 ## Reproducibility
 
-Clone the repository
+1. Clone the repository
 ```bash
 git clone git@github.com:ferygood/app_TFprimate.git
 ```
-Install package dependencies
+2. Install package dependencies
 ```python
 # create a virtualenv such as mkvirtualenv flask-tfprimate
 pip install -r requirements.txt
+```
 
-Develop locally
+3. Develop locally
+```
 # run debug mode
 # uncomment app.run(debug=True)
 python app.py
