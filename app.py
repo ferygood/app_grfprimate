@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 import psycopg
 from psycopg import sql
+from tfprimate.getInfo import ncbi_summary # wait for database have ensemblID to ENTREZ
 
 
 app = Flask(__name__)
