@@ -43,17 +43,21 @@
                     <tr>
                         <th style="border: 1px solid black; padding: 8px;">EnsemblID</th>
                         <th style="border: 1px solid black; padding: 8px;">GeneName</th>
-                        <th style="border: 1px solid black; padding: 8px;">Hsap</th>
                     </tr>
                     {% for gene in gene_data %}
                     <tr>
                         <td style="border: 1px solid black; padding: 8px;">{{ gene[0] }}</td>
                         <td style="border: 1px solid black; padding: 8px;">{{ gene[1] }}</td>
-                        <td style="border: 1px solid black; padding: 8px;">{{ gene[2] }}</td>
                     </tr>
+                    <h4>Description</h4> 
+                    <td colspan="3" style="border: none; padding: 8px;">
+                        {% if gene[3] %}
+                            <a href="https://www.ncbi.nlm.nih.gov/gene/{{ gene[3] }}" target="_blank" class="btn btn-outline-primary me-2">NCBI</a>
+                            <a href="https://www.ensembl.org/Homo_sapiens/Gene/Summary?g={{ gene[0] }}" target="_blank" class="btn btn-outline-success">Ensembl</a>
+                        {% endif %}
+                    </td>
                   {% endfor %}
                 </table>
-                <h4>Protein description</h4>
                 <div class="container mt-5">
                     {% if gene_info %}
                     {{ gene_info }}
