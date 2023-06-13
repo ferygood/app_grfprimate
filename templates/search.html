@@ -39,7 +39,6 @@
         </ul>
         <div class="tab-content mt-3">
             <div class="tab-pane fade show active" id="info">
-                <h3>Info</h3>
                 <table style="border-collapse: collapse; border: 1px solid black; margin-top: 10px; margin-bottom: 10px;">
                     <tr>
                         <th style="border: 1px solid black; padding: 8px;">EnsemblID</th>
@@ -54,6 +53,12 @@
                     </tr>
                   {% endfor %}
                 </table>
+                <h4>Protein description</h4>
+                <div class="container mt-5">
+                    {% if gene_info %}
+                    {{ gene_info }}
+                    {% endif %}
+                </div>
                 <p>{{ row }}</p>
             </div>
             <div class="tab-pane fade" id="rna-seq">
