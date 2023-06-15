@@ -18,7 +18,13 @@ def search():
         gene = request.form['gene_name']
     
         #establish a connection
-        with psycopg.connect('dbname=tfprimate user=postgres password=yao123') as conn:
+        with psycopg.connect("""
+             host=localhost 
+             port=5432 
+             dbname=tfprimate 
+             user=postgres 
+             password=yao123
+             """) as conn:
             with conn.cursor() as cur:
                 cur.execute(
                     sql.SQL("""
@@ -27,8 +33,9 @@ def search():
                     JOIN grfid ON primateGRFs.EnsemblID = grfid.EnsemblID
                     WHERE lower(primateGRFs.GeneName) = lower(%s) OR lower(primateGRFs.EnsemblID) = lower(%s)"""), [gene, gene]
                 )
-
+                
                 gene_data = cur.fetchall()
+                print(gene_data)
                 conn.commit()
 
         if not gene_data:
