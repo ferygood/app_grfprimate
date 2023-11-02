@@ -3,7 +3,9 @@ from tfprimate.getInfo import ncbi_summary
 
 app = Flask(__name__)
 
-@app.route('/')
+base_url = "/grfprimate"
+
+@app.route(f'{base_url}/')
 def index():
     return render_template('index.html')
 
@@ -14,15 +16,15 @@ def search():
 
     return render_template('search.html', gene_data=gene_data, gene_info=gene_info)
 
-@app.route('/alignment')
+@app.route(f'{base_url}/alignment')
 def alignment():
     return render_template('alignment.html')
 
-@app.route('/download')
+@app.route(f'{base_url}/download')
 def download():
     return render_template('download.html')
 
-@app.route('/about')
+@app.route(f'{base_url}/about')
 def about():
     return render_template('about.html')
 
