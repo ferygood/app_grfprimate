@@ -6,9 +6,9 @@
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 40vh;">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Search a Transcription Factor (TF)</h4>
+                <h4 class="card-title">Search a Gene Regulatory Factor (GRFs)</h4>
                 <img src="{{ url_for('static', filename='genes.png') }}" alt="" class="card-img-top" style="max-width: 200px; margin: 0 auto;">
-                <p class="card-text">Type a name or Ensembl ID of the desired TF and search for <br>results comparing human and other primates.</p>
+                <p class="card-text">Type a name or Ensembl ID of the desired GRF and search for <br>results comparing human and other primates.</p>
                 <form action="/search" method="POST">
                     <div class="mb-3">
                         <input type="text" name="gene_name" placeholder="i.e. zeb2, ENSG00000169554" class="form-control" style="width: 70%; margin: 0 auto;">
