@@ -1,8 +1,24 @@
-from flask import Flask, render_template, request
+import os
+from flask import Flask, render_template, Blueprint
 from tfprimate.getInfo import ncbi_summary
 
-app = Flask(__name__)
-app.static_url_path = 'static'
+configuration = dict(
+    development = dict(
+        ENV='development',
+        APPLICATION_ROOT='/',
+    ),
+    production=dict(
+        ENV='production',
+        APPLICATION_ROOT='/grfprimate/',
+    ),
+)
+
+# get configuration based on environment
+config_key = os.getenv('FLASK_CONFIG', 'production')
+config_dict = configuration[config_key]
+app = Flask(__name__, static_url_path=config_dict['APPLICATION_ROOT'])
+app.config.update(config_dict)
+bp = Blueprint('myapp', __name__)
 
 @app.route('/')
 def index():
@@ -27,6 +43,7 @@ def download():
 def about():
     return render_template('about.html')
 
+app.register_blueprint(bp, url_prefix=app.config['APPLICATION_ROOT'])
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
